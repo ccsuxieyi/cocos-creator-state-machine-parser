@@ -38,9 +38,9 @@ module.exports = {
       //generate file
       let content = "let StateMachine = require('state-machine');\n"+
                     "let fsmData = {\n"+
-                       "initial: 'nope',\n" + 
+                       "init: 'nope',\n" + 
                        "//please select the enter-state here ↓\n" + 
-                       "events: [\n" +
+                       "transitions: [\n" +
                        '//{"name":"startup","from":"nope","to":/*enter-state*/},\n' +  
                        fsm_items_string.substring(1,fsm_items_string.length - 1).replace(/},/g,"},\n") + "\n" + 
                        "]\n" +
@@ -48,8 +48,7 @@ module.exports = {
 
       //factory for the situation that many body use the same fsm template instend of same fsm
       content += "let create = function(){\n"+
-                  "let fsm = StateMachine.create(fsmData);\n"+
-                  "fsm.ASYNC = StateMachine.ASYNC;\n"+
+                  "let fsm = new StateMachine(fsmData);\n"+
                   "return fsm;\n"+
                   "}\n";
       
